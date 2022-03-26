@@ -18,9 +18,9 @@ const initialState = `
 export class HtmlCodeEditor extends LitElement {
   static styles = css`
     :host {
+      all: initial;
       display: block;
       height: 90vh;
-      background: white;
     }
 
     [hidden] {
@@ -29,7 +29,7 @@ export class HtmlCodeEditor extends LitElement {
 
     #container {
       display: flex;
-      height: 100%;
+      height: calc(100% - 2rem);
     }
 
     #container > * {
@@ -37,6 +37,7 @@ export class HtmlCodeEditor extends LitElement {
       height: 100%;
       overflow: auto;
       box-sizing: border-box;
+      background-color: white;
     }
 
     .cm-editor {
@@ -51,13 +52,14 @@ export class HtmlCodeEditor extends LitElement {
     #toolbar {
       display: flex;
       justify-content: space-between;
+      height: 1.5rem;
     }
   `;
 
   @query('iframe')
   iframe!: HTMLIFrameElement;
 
-  @query('#codemirror')
+  @query('#editor')
   codemirror!: HTMLDivElement;
 
   @property()
@@ -190,11 +192,12 @@ export class HtmlCodeEditor extends LitElement {
           ?hidden=${!this.shown.has('editor')}
           part="editor"
           @keyup=${this.handleEnter}
-          id="codemirror"
+          id="editor"
         ></div>
         <iframe
           ?hidden=${!this.shown.has('preview')}
           part="preview"
+          id="preview"
           title="content"
           .srcdoc=${this.code}
         ></iframe>
