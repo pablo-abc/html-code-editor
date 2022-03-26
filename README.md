@@ -5,14 +5,14 @@ This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ## Installation
 
 ```bash
-npm i html-code-editor
+npm i @pberganza/html-code-editor
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import 'html-code-editor/html-code-editor.js';
+  import '@pberganza/html-code-editor/html-code-editor.js';
 </script>
 
 <html-code-editor></html-code-editor>
