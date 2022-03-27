@@ -71,7 +71,12 @@ export class HtmlCodeEditor extends LitElement {
   @property()
   code = initialState;
 
-  @state()
+  @property({
+    converter(value) {
+      if (!value) return new Set(['editor', 'preview']);
+      return new Set(value.split(' '));
+    },
+  })
   shown = new Set(['editor', 'preview']);
 
   @state()
@@ -177,6 +182,7 @@ export class HtmlCodeEditor extends LitElement {
           part="button"
           title="Toggle editor"
           @click=${this.togglePart('editor')}
+          ?disabled=${this.shown.has('editor') && this.shown.size === 1}
         >
           <svg
             fill="none"
@@ -212,6 +218,7 @@ export class HtmlCodeEditor extends LitElement {
           part="button"
           title="Toggle preview"
           @click=${this.togglePart('preview')}
+          ?disabled=${this.shown.has('preview') && this.shown.size === 1}
         >
           <svg
             fill="none"
