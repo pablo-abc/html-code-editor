@@ -4,6 +4,7 @@ import { query, property, state } from 'lit/decorators.js';
 import { EditorView, keymap } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
 import { EditorState, basicSetup } from '@codemirror/basic-setup';
+import { vim } from '@replit/codemirror-vim';
 import { html as langHtml } from '@codemirror/lang-html';
 // @ts-ignore
 import prettier from 'prettier/esm/standalone.mjs';
@@ -138,7 +139,7 @@ export class HtmlCodeEditor extends LitElement {
     this.editorView = new EditorView({
       state: EditorState.create({
         doc: initialState.trim(),
-        extensions: [basicSetup, keymap.of([indentWithTab]), langHtml()],
+        extensions: [vim(), basicSetup, keymap.of([indentWithTab]), langHtml()],
       }),
       parent: this.codemirror,
     });

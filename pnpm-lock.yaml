@@ -6,10 +6,16 @@ specifiers:
   '@babel/eslint-plugin': ^7.17.7
   '@codemirror/basic-setup': ^0.19.1
   '@codemirror/commands': ^0.19.8
+  '@codemirror/fold': ^0.19.3
   '@codemirror/lang-html': ^0.19.4
+  '@codemirror/search': ^0.19.9
+  '@codemirror/state': ^0.19.9
+  '@codemirror/stream-parser': ^0.19.7
+  '@codemirror/text': ^0.19.6
   '@codemirror/view': ^0.19.47
   '@custom-elements-manifest/analyzer': ^0.4.17
   '@open-wc/eslint-config': ^4.3.0
+  '@replit/codemirror-vim': ^0.19.1
   '@rollup/plugin-commonjs': ^21.0.2
   '@rollup/plugin-node-resolve': ^13.1.3
   '@types/node': ^17.0.23
@@ -35,8 +41,14 @@ specifiers:
 dependencies:
   '@codemirror/basic-setup': 0.19.1
   '@codemirror/commands': 0.19.8
+  '@codemirror/fold': 0.19.3
   '@codemirror/lang-html': 0.19.4
+  '@codemirror/search': 0.19.9
+  '@codemirror/state': 0.19.9
+  '@codemirror/stream-parser': 0.19.7
+  '@codemirror/text': 0.19.6
   '@codemirror/view': 0.19.47
+  '@replit/codemirror-vim': 0.19.1_531d858a4317fdb9b84cdf8db5d5bbac
   lit: 2.2.1
   prettier: 2.6.1
 
@@ -517,6 +529,17 @@ packages:
       '@codemirror/text': 0.19.6
     dev: false
 
+  /@codemirror/stream-parser/0.19.7:
+    resolution: {integrity: sha512-4ExcbKksmU4PIT8s11/dPESgMNLQqlMlbQzRQ1CyMcmygcuQk+58zQ84nv/X17OCUd2ephZ1DKEaHHACifzCiA==}
+    dependencies:
+      '@codemirror/highlight': 0.19.7
+      '@codemirror/language': 0.19.8
+      '@codemirror/state': 0.19.9
+      '@codemirror/text': 0.19.6
+      '@lezer/common': 0.15.12
+      '@lezer/lr': 0.15.8
+    dev: false
+
   /@codemirror/text/0.19.6:
     resolution: {integrity: sha512-T9jnREMIygx+TPC1bOuepz18maGq/92q2a+n4qTqObKwvNMg+8cMTslb8yxeEDEq7S3kpgGWxgO1UWbQRij0dA==}
     dev: false
@@ -674,6 +697,24 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@replit/codemirror-vim/0.19.1_531d858a4317fdb9b84cdf8db5d5bbac:
+    resolution: {integrity: sha512-9nlYgX4OkL18WkhJDWS38Q2OOl93eLbRik9wZSej0jbER7LdokpOLc6D/yUlzxlcRwSVlea/8c+grjNfkTzrbA==}
+    peerDependencies:
+      '@codemirror/fold': ^0.19.0
+      '@codemirror/search': ^0.19.5
+      '@codemirror/state': ^0.19.0
+      '@codemirror/stream-parser': ^0.19.0
+      '@codemirror/text': ^0.19.0
+      '@codemirror/view': ^0.19.0
+    dependencies:
+      '@codemirror/fold': 0.19.3
+      '@codemirror/search': 0.19.9
+      '@codemirror/state': 0.19.9
+      '@codemirror/stream-parser': 0.19.7
+      '@codemirror/text': 0.19.6
+      '@codemirror/view': 0.19.47
+    dev: false
 
   /@rollup/plugin-commonjs/21.0.2_rollup@2.70.1:
     resolution: {integrity: sha512-d/OmjaLVO4j/aQX69bwpWPpbvI3TJkQuxoAk7BH8ew1PyoMBLTOuvJTjzG8oEoW7drIIqB0KCJtfFLu/2GClWg==}

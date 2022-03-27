@@ -22,8 +22,14 @@
   "dependencies": {
     "@codemirror/basic-setup": "^0.19.1",
     "@codemirror/commands": "^0.19.8",
+    "@codemirror/fold": "^0.19.3",
     "@codemirror/lang-html": "^0.19.4",
+    "@codemirror/search": "^0.19.9",
+    "@codemirror/state": "^0.19.9",
+    "@codemirror/stream-parser": "^0.19.7",
+    "@codemirror/text": "^0.19.6",
     "@codemirror/view": "^0.19.47",
+    "@replit/codemirror-vim": "^0.19.1",
     "lit": "^2.0.2",
     "prettier": "^2.4.1"
   },
