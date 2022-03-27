@@ -3,7 +3,7 @@
   "description": "An HTML code editor made with code mirror for live coding",
   "license": "MIT",
   "author": "html-code-editor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

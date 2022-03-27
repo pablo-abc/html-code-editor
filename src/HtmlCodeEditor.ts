@@ -137,6 +137,7 @@ export class HtmlCodeEditor extends LitElement {
   firstUpdated() {
     this.editorView = new EditorView({
       state: EditorState.create({
+        doc: initialState.trim(),
         extensions: [basicSetup, keymap.of([indentWithTab]), langHtml()],
       }),
       parent: this.codemirror,
