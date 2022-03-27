@@ -1,9 +1,14 @@
+import type { PropertyValues } from 'lit';
 import { LitElement, html, css, svg } from 'lit';
 import { query, property, state } from 'lit/decorators.js';
 import { EditorView, keymap } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
 import { EditorState, basicSetup } from '@codemirror/basic-setup';
 import { html as langHtml } from '@codemirror/lang-html';
+// @ts-ignore
+import prettier from 'prettier/esm/standalone.mjs';
+// @ts-ignore
+import parserHtml from 'prettier/esm/parser-html.mjs';
 
 const initialState = `
 <!DOCTYPE html>
@@ -115,23 +120,52 @@ export class HtmlCodeEditor extends LitElement {
   }
 
   runCode() {
-    this.code = this.editorView?.state.doc.toJSON().join('') || '';
+    this.code = this.editorView?.state.doc.toJSON().join('\n') || '';
   }
 
   handleEnter(event: KeyboardEvent) {
-    if (!event.ctrlKey || event.key !== 'Enter') return;
-    event.preventDefault();
-    this.runCode();
+    if (event.ctrlKey && event.key === 'Enter') {
+      event.preventDefault();
+      this.runCode();
+    }
+    if (event.ctrlKey && event.key === 's') {
+      event.preventDefault();
+      this.formatCode();
+    }
   }
 
   firstUpdated() {
     this.editorView = new EditorView({
       state: EditorState.create({
-        doc: initialState.trim(),
         extensions: [basicSetup, keymap.of([indentWithTab]), langHtml()],
       }),
       parent: this.codemirror,
     });
+  }
+
+  formatCode() {
+    if (!this.editorView) return;
+    const formatted = prettier.format(
+      this.editorView.state.doc.toJSON().join('\n'),
+      { parser: 'html', plugins: [parserHtml] }
+    );
+    this.editorView?.dispatch({
+      changes: { from: 0, to: this.editorView.state.doc.length },
+    });
+    this.editorView?.dispatch({
+      changes: { from: 0, insert: formatted.trim() },
+    });
+  }
+
+  updated(changed: PropertyValues<this>) {
+    if (changed.has('code')) {
+      this.editorView?.dispatch({
+        changes: { from: 0, to: this.editorView.state.doc.length },
+      });
+      this.editorView?.dispatch({
+        changes: { from: 0, insert: this.code.trim() },
+      });
+    }
   }
 
   render() {
@@ -191,7 +225,7 @@ export class HtmlCodeEditor extends LitElement {
         <div
           ?hidden=${!this.shown.has('editor')}
           part="editor"
-          @keyup=${this.handleEnter}
+          @keydown=${this.handleEnter}
           id="editor"
         ></div>
         <iframe
